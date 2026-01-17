@@ -1,5 +1,5 @@
-![Version](https://img.shields.io/npm/v/@emirchus/kick-js?label=Version)
-![License](https://img.shields.io/npm/l/@emirchus/kick-js?label=License)
+![Version](https://img.shields.io/npm/v/@emirchus/kick-api-js?label=Version)
+![License](https://img.shields.io/npm/l/@emirchus/kick-api-js?label=License)
 
 ❇️ **@retconned/kick-js**
 
@@ -22,13 +22,13 @@
 Install the @retconned/kick-js package using the following command:
 
 ```sh
-npm install @emichus/kick-js
+npm install @emichus/kick-api-js
 ```
 
 ## Example code :computer:
 
 ```ts
-import { createClient } from "@emirchus/kick-js";
+import { createClient } from "@emirchus/kick-api-js";
 import "dotenv/config";
 
 const client = createClient("xqc", { logger: true, readOnly: true });
@@ -84,4 +84,4 @@ This section lists bugs that have been fixed in this fork:
 
 ## Disclaimer :warning:
 
-@emirchus/kick-js is not affiliated with or endorsed by [Kick.com](https://kick.com). It is an independent tool created to facilitate making moderation bots & other chat-related applications.
+@emirchus/kick-api-js is not affiliated with or endorsed by [Kick.com](https://kick.com). It is an independent tool created to facilitate making moderation bots & other chat-related applications.
