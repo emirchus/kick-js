@@ -1,4 +1,4 @@
-import { createClient, type MessageData } from "@retconned/kick-js";
+import { createClient, type MessageData } from "@emirchus/kick-api-js";
 import "dotenv/config";
 
 const client = createClient("xqc", { logger: true, readOnly: false });
