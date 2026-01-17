@@ -1,5 +1,11 @@
 # @emirchus/kick-api-js
 
+## 0.2.1
+
+### Patch Changes
+
+- c11791c: Changed axios by fetch
+
 ## 0.2.0
 
 ### Minor Changes
