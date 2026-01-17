@@ -1,6 +1,6 @@
 {
-  "name": "@retconned/kick-js",
-  "version": "0.5.4",
+  "name": "@emirchus/kick-js",
+  "version": "0.6.0",
   "description": "A typescript bot interface for kick.com",
   "keywords": [
     "Kick.com",
@@ -12,14 +12,14 @@
     "Kick Api Wrapper",
     "Kick library"
   ],
-  "homepage": "https://github.com/retconned/kick-js",
+  "homepage": "https://github.com/emirchus/kick-js",
   "bugs": {
-    "url": "https://github.com/retconned/kick-js/issues"
+    "url": "https://github.com/emirchus/kick-js/issues"
   },
-  "author": "retconned <retcnned@gmail.com>",
+  "author": "emirchus <retcnned@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/retconned/kick-js.git"
+    "url": "git+https://github.com/emirchus/kick-js.git"
   },
   "files": [
     "dist"
@@ -35,15 +35,11 @@
     "lint:check": "eslint \"src/**/*.{ts,js}\"",
     "lint:fix": "eslint --fix \"src/**/*.{ts,js}\"",
     "check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
-
     "dev": "vitest",
-
     "checks": "npm run format:fix && npm run lint:ts && npm run check-exports && npm run build",
-
     "release:version": "changeset version",
     "release:publish": "changeset publish",
     "release:local": "npm run release:version && npm run release:publish",
-
     "prepublishOnly": "npm run checks"
   },
   "exports": {
