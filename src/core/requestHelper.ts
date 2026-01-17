@@ -46,11 +46,17 @@ export const makeRequest = async <T>(
   data?: unknown,
 ): Promise<T | null> => {
   try {
+    if (process.env.LOG === "debug") {
+      console.log(`Request: ${method} ${url}`);
+      console.log(`Headers: ${JSON.stringify(headers)}`);
+      console.log(`Data: ${JSON.stringify(data)}`);
+    }
     const response: AxiosResponse<T> = await axios({
       method,
       url,
       headers,
       data,
+      withCredentials: true,
     });
 
     if (response.status === 200) {
