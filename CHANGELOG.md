@@ -1,4 +1,4 @@
-# @retconned/kickjs
+# @emirchus/kickjs
 
 ## 0.0.1
 
