@@ -1,4 +1,10 @@
-# @emirchus/kickjs
+# @emirchus/kick-api-js
+
+## 0.1.1
+
+### Patch Changes
+
+- 8fcec57: First release
 
 ## 0.0.1
 
