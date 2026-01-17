@@ -1,5 +1,11 @@
 # @emirchus/kick-api-js
 
+## 0.2.0
+
+### Minor Changes
+
+- f00128b: Added some logs and values for debug
+
 ## 0.1.1
 
 ### Patch Changes
