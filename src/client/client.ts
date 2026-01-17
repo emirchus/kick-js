@@ -297,6 +297,7 @@ export const createClient = (
     targetUser: string,
     durationInMinutes?: number,
     permanent: boolean = false,
+    reason?: string,
   ) => {
     if (!channelInfo) {
       throw new Error("Channel info not available");
@@ -326,7 +327,12 @@ export const createClient = (
     });
 
     try {
-      const data = permanent
+      const data: {
+        banned_username: string;
+        permanent: boolean;
+        duration?: number;
+        reason?: string;
+      } = permanent
         ? { banned_username: targetUser, permanent: true }
         : {
             banned_username: targetUser,
@@ -334,9 +340,13 @@ export const createClient = (
             permanent: false,
           };
 
+      if (reason) {
+        data.reason = reason;
+      }
+
       const result = await makeRequest<{ success: boolean }>(
         "post",
-        `https://kick.com/api/v2/channels/${channelInfo.id}/bans`,
+        `https://kick.com/api/v2/channels/${channelInfo.slug}/bans`,
         headers,
         data,
       );

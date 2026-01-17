@@ -1,7 +1,9 @@
-![Version](https://img.shields.io/npm/v/@retconned/kick-js?label=Version)
-![License](https://img.shields.io/npm/l/@retconned/kick-js?label=License)
+![Version](https://img.shields.io/npm/v/@emirchus/kick-js?label=Version)
+![License](https://img.shields.io/npm/l/@emirchus/kick-js?label=License)
 
 ❇️ **@retconned/kick-js**
+
+> **Note:** This package is a fork of [@retconned/kick-js](https://www.npmjs.com/package/@retconned/kick-js). This fork aims to fix bugs and issues encountered during usage. If you're experiencing problems with the original package, this fork may provide solutions.
 
 ## **What is kick-js**
 
@@ -20,13 +22,13 @@
 Install the @retconned/kick-js package using the following command:
 
 ```sh
-npm install @retconned/kick-js
+npm install @emichus/kick-js
 ```
 
 ## Example code :computer:
 
 ```ts
-import { createClient } from "@retconned/kick-js";
+import { createClient } from "@emirchus/kick-js";
 import "dotenv/config";
 
 const client = createClient("xqc", { logger: true, readOnly: true });
@@ -74,6 +76,12 @@ const polls = await client.getPolls();
 // example: const polls = await client.getPolls("xqc");
 ```
 
+## Fixed Bugs :bug:
+
+This section lists bugs that have been fixed in this fork:
+
+-   _Ban/timeout users_
+
 ## Disclaimer :warning:
 
-@retconned/kick-js is not affiliated with or endorsed by [Kick.com](https://kick.com). It is an independent tool created to facilitate making moderation bots & other chat-related applications.
+@emirchus/kick-js is not affiliated with or endorsed by [Kick.com](https://kick.com). It is an independent tool created to facilitate making moderation bots & other chat-related applications.
