@@ -22,7 +22,8 @@ export type ChatEvents =
   | "PinnedMessageCreated"
   | "PinnedMessageDeleted"
   | "PollUpdate"
-  | "PollDelete";
+  | "PollDelete"
+  | "Ready";
 
 // Infere the type of the data based on the event type
 export type ChatEventData<T extends ChatEvents> = T extends "ChatMessage"
@@ -47,7 +48,9 @@ export type ChatEventData<T extends ChatEvents> = T extends "ChatMessage"
                     ? unknown
                     : T extends "PollDelete"
                       ? unknown
-                      : never;
+                      : T extends "Ready"
+                        ? never
+                        : never;
 
 export const parseMessage = (message: string) => {
   try {

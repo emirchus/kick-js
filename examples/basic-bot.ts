@@ -1,4 +1,4 @@
-import { createClient, type MessageData } from "@emirchus/kick-api-js";
+import { createClient, type MessageData } from "@emirchus/kick-js";
 import "dotenv/config";
 
 const client = createClient("xqc", { logger: true, readOnly: false });
@@ -25,7 +25,7 @@ client.on("ready", () => {
   console.log(`Bot ready & logged into ${client.user?.tag}!`);
 });
 
-client.on("ChatMessage", async (message: MessageData) => {
+client.on("ChatMessage", async (message) => {
   console.log(`${message.sender.username}: ${message.content}`);
 
   if (message.content.match("!ping")) {
