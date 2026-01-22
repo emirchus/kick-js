@@ -1,16 +1,3 @@
-import axios, { type AxiosResponse } from "axios";
-
-import { AxiosHeaders } from "axios";
-
-export interface ApiHeaders extends AxiosHeaders {
-  accept: string;
-  authorization: string;
-  "content-type": string;
-  "x-xsrf-token": string;
-  cookie: string;
-  Referer: string;
-}
-
 export interface RequestConfig {
   bearerToken: string;
   xsrfToken: string;
@@ -22,27 +9,28 @@ export const createHeaders = ({
   bearerToken,
   cookies,
   channelSlug,
-}: RequestConfig): AxiosHeaders => {
-  const headers = new AxiosHeaders();
-
-  headers.set("accept", "application/json");
-  headers.set("accept-language", "en-US,en;q=0.9");
-  headers.set("authorization", `Bearer ${bearerToken}`);
-  headers.set("cache-control", "max-age=0");
-  headers.set("cluster", "v2");
-  headers.set("content-type", "application/json");
-  headers.set("priority", "u=1, i");
-  headers.set("cookie", cookies);
-  headers.set("Referer", `https://kick.com/${channelSlug}`);
-  headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
-
-  return headers;
+  xsrfToken: _xsrfToken, // XSRF token is included in cookies, not needed as separate header
+}: RequestConfig): Record<string, string> => {
+  return {
+    accept: "application/json",
+    "accept-language": "en-US,en;q=0.9",
+    authorization: `Bearer ${bearerToken}`,
+    "cache-control": "max-age=0",
+    cluster: "v2",
+    "content-type": "application/json",
+    priority: "u=1, i",
+    cookie: cookies,
+    Referer: `https://kick.com/${channelSlug}`,
+    "x-CSRF-token": _xsrfToken,
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "User-Agent": "Bot/1.0",
+  };
 };
 
 export const makeRequest = async <T>(
   method: "get" | "post" | "put" | "delete",
   url: string,
-  headers: AxiosHeaders,
+  headers: Record<string, string>,
   data?: unknown,
 ): Promise<T | null> => {
   try {
@@ -51,18 +39,30 @@ export const makeRequest = async <T>(
       console.log(`Headers: ${JSON.stringify(headers)}`);
       console.log(`Data: ${JSON.stringify(data)}`);
     }
-    const response: AxiosResponse<T> = await axios({
-      method,
-      url,
-      headers,
-      data,
-      withCredentials: true,
-    });
 
-    if (response.status === 200) {
-      return response.data;
+    const fetchOptions: RequestInit = {
+      method: method.toUpperCase(),
+      headers,
+      mode: "cors",
+      credentials: "include",
+    };
+
+    if (data && (method === "post" || method === "put")) {
+      fetchOptions.body = JSON.stringify(data);
     }
-    console.error(`Request failed with status: ${response.status}`);
+
+    const response = await fetch(url, fetchOptions);
+
+    if (response.status === 200 || response.status === 204) {
+      // For DELETE requests, response might be empty
+      if (method === "delete" && response.status === 204) {
+        return { success: true } as T;
+      }
+      return await response.json();
+    }
+
+    const errorData = await response.json().catch(() => ({}));
+    console.error(`Request failed with status: ${response.status}`, errorData);
     return null;
   } catch (error) {
     console.error(`Request error for ${url}:`, error);

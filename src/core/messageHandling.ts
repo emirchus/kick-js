@@ -11,6 +11,9 @@ import type {
 } from "../types/events";
 import { parseJSON } from "../utils/utils";
 
+export type ChatEvents = "ChatMessage" | "Subscription" | "GiftedSubscriptions" | "StreamHost" | "MessageDeleted" | "UserBanned" | "UserUnbanned" | "PinnedMessageCreated" | "PinnedMessageDeleted" | "PollUpdate" | "PollDelete";
+
+
 export const parseMessage = (message: string) => {
   try {
     const messageEventJSON = parseJSON<MessageEvent>(message);
