@@ -81,6 +81,7 @@ const polls = await client.getPolls();
 This section lists bugs that have been fixed in this fork:
 
 -   _Ban/timeout users_
+-   _Added types to events_
 
 ## Disclaimer :warning:
 
