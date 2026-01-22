@@ -11,8 +11,43 @@ import type {
 } from "../types/events";
 import { parseJSON } from "../utils/utils";
 
-export type ChatEvents = "ChatMessage" | "Subscription" | "GiftedSubscriptions" | "StreamHost" | "MessageDeleted" | "UserBanned" | "UserUnbanned" | "PinnedMessageCreated" | "PinnedMessageDeleted" | "PollUpdate" | "PollDelete";
+export type ChatEvents =
+  | "ChatMessage"
+  | "Subscription"
+  | "GiftedSubscriptions"
+  | "StreamHost"
+  | "MessageDeleted"
+  | "UserBanned"
+  | "UserUnbanned"
+  | "PinnedMessageCreated"
+  | "PinnedMessageDeleted"
+  | "PollUpdate"
+  | "PollDelete";
 
+// Infere the type of the data based on the event type
+export type ChatEventData<T extends ChatEvents> = T extends "ChatMessage"
+  ? ChatMessage
+  : T extends "Subscription"
+    ? Subscription
+    : T extends "GiftedSubscriptions"
+      ? GiftedSubscriptionsEvent
+      : T extends "StreamHost"
+        ? StreamHostEvent
+        : T extends "MessageDeleted"
+          ? MessageDeletedEvent
+          : T extends "UserBanned"
+            ? UserBannedEvent
+            : T extends "UserUnbanned"
+              ? UserUnbannedEvent
+              : T extends "PinnedMessageCreated"
+                ? PinnedMessageCreatedEvent
+                : T extends "PinnedMessageDeleted"
+                  ? MessageDeletedEvent
+                  : T extends "PollUpdate"
+                    ? unknown
+                    : T extends "PollDelete"
+                      ? unknown
+                      : never;
 
 export const parseMessage = (message: string) => {
   try {

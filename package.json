@@ -39,8 +39,7 @@
     "checks": "npm run format:fix && npm run lint:ts && npm run check-exports && npm run build",
     "release:version": "changeset version",
     "release:publish": "changeset publish",
-    "release:local": "npm run release:version && npm run release:publish",
-    "prepublishOnly": "npm run checks"
+    "release:local": "npm run release:version && npm run release:publish"
   },
   "exports": {
     "./package.json": "./package.json",

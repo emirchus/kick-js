@@ -2,7 +2,7 @@ import type WebSocket from "ws";
 import EventEmitter from "events";
 import { authentication, getChannelData, getVideoData } from "../core/kickApi";
 import { createWebSocket } from "../core/websocket";
-import { parseMessage } from "../core/messageHandling";
+import { parseMessage, type ChatEvents } from "../core/messageHandling";
 import type { KickChannelInfo } from "../types/channels";
 import type { VideoInfo } from "../types/video";
 import type {
@@ -11,6 +11,7 @@ import type {
   Poll,
   Leaderboard,
   LoginOptions,
+  EventHandler,
 } from "../types/client";
 import type { MessageData } from "../types/events";
 import { validateCredentials } from "../utils/utils";
@@ -203,9 +204,9 @@ export const createClient = (
     void initialize();
   }
 
-  const on = (event: string, listener: (...args: any[]) => void) => {
+  function on<T extends ChatEvents>(event: T, listener: EventHandler<T>) {
     emitter.on(event, listener);
-  };
+  }
 
   const getUser = () =>
     channelInfo

@@ -1,9 +1,12 @@
+import type { ChatEventData, ChatEvents } from "../core/messageHandling";
 import type { Channel, Livestream } from "./video";
 
 /**
  * Generic event handler type for processing event data
  */
-export type EventHandler<T> = (data: T) => void;
+export type EventHandler<T extends ChatEvents> = (
+  data: ChatEventData<T>,
+) => void;
 
 /**
  * Configuration options for the Kick client
@@ -56,7 +59,7 @@ export interface Video {
  */
 export interface KickClient {
   /** Register an event listener for WebSocket events */
-  on: (event: string, listener: (...args: any[]) => void) => void;
+  on: <T extends ChatEvents>(event: T, listener: EventHandler<T>) => void;
   /** Fetch video on demand (VOD) information by video ID */
   vod: (video_id: string) => Promise<Video>;
   /** Authenticate the client with login credentials or tokens */
