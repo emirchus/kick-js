@@ -1,4 +1,10 @@
-# @emirchus/kick-api-js
+# @emirchus/kick-js
+
+## 0.3.1
+
+### Patch Changes
+
+- e1df1f6: fixed ready event
 
 ## 0.3.0
 

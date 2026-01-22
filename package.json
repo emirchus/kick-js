@@ -1,6 +1,6 @@
 {
-  "name": "@emirchus/kick-api-js",
-  "version": "0.3.0",
+  "name": "@emirchus/kick-js",
+  "version": "0.3.1",
   "description": "A typescript bot interface for kick.com",
   "keywords": [
     "Kick.com",
