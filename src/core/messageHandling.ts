@@ -23,34 +23,46 @@ export type ChatEvents =
   | "PinnedMessageDeleted"
   | "PollUpdate"
   | "PollDelete"
-  | "Ready";
+  | "ready"
+  | 'error'
+  | 'disconnect';
+
+type ChannelInfo = {
+  id: number;
+  username: string;
+  tag: string;
+} | null;
 
 // Infere the type of the data based on the event type
 export type ChatEventData<T extends ChatEvents> = T extends "ChatMessage"
   ? ChatMessage
   : T extends "Subscription"
-    ? Subscription
-    : T extends "GiftedSubscriptions"
-      ? GiftedSubscriptionsEvent
-      : T extends "StreamHost"
-        ? StreamHostEvent
-        : T extends "MessageDeleted"
-          ? MessageDeletedEvent
-          : T extends "UserBanned"
-            ? UserBannedEvent
-            : T extends "UserUnbanned"
-              ? UserUnbannedEvent
-              : T extends "PinnedMessageCreated"
-                ? PinnedMessageCreatedEvent
-                : T extends "PinnedMessageDeleted"
-                  ? MessageDeletedEvent
-                  : T extends "PollUpdate"
-                    ? unknown
-                    : T extends "PollDelete"
-                      ? unknown
-                      : T extends "Ready"
-                        ? never
-                        : never;
+  ? Subscription
+  : T extends "GiftedSubscriptions"
+  ? GiftedSubscriptionsEvent
+  : T extends "StreamHost"
+  ? StreamHostEvent
+  : T extends "MessageDeleted"
+  ? MessageDeletedEvent
+  : T extends "UserBanned"
+  ? UserBannedEvent
+  : T extends "UserUnbanned"
+  ? UserUnbannedEvent
+  : T extends "PinnedMessageCreated"
+  ? PinnedMessageCreatedEvent
+  : T extends "PinnedMessageDeleted"
+  ? MessageDeletedEvent
+  : T extends "PollUpdate"
+  ? unknown
+  : T extends "PollDelete"
+  ? unknown
+  : T extends "ready"
+  ? ChannelInfo
+  : T extends "error"
+  ? Error
+  : T extends "disconnect"
+  ? void
+  : never;
 
 export const parseMessage = (message: string) => {
   try {

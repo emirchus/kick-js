@@ -21,8 +21,16 @@ client.login({
   },
 });
 
-client.on("ready", () => {
-  console.log(`Bot ready & logged into ${client.user?.tag}!`);
+client.on("ready", (chanelInfo) => {
+  console.log(`Bot ready & logged into ${chanelInfo?.tag}!`);
+});
+
+client.on("error", (error) => {
+  console.error(`Error: ${error}`);
+});
+
+client.on("disconnect", () => {
+  console.log("Disconnected from channel");
 });
 
 client.on("ChatMessage", async (message) => {
