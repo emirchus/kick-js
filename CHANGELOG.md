@@ -1,5 +1,11 @@
 # @emirchus/kick-api-js
 
+## 0.3.0
+
+### Minor Changes
+
+- 33308b9: Added types to events
+
 ## 0.2.1
 
 ### Patch Changes
